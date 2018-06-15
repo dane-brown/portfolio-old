@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Dane Brown - Web Developer</title>
+  <link rel="stylesheet" href="{% static 'css/structure.css' %}" type="text/css">
+  <link rel="stylesheet" href="{% static 'css/structure.legacy.min.css' %}" type="text/css">
+  <link rel="stylesheet" href="{% static 'css/custom.css' %}" type="text/css">
+  <link rel="stylesheet" href="{% static 'css/slick.css' %}" type="text/css">
+</head>
+<body>
+  <div class="Content">
+    {% include 'frontend/navigation.html' %}
+    <div class="content-wrapper">
+      {% block content %}{% endblock content %}
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="{% static 'js/slick.min.js' %}"></script>
+  <script type="text/javascript">
+  $('.nav-opener').on('click', function() {
+    $('.Navigation').toggleClass('open');
+    $('.content-wrapper').toggleClass('smaller');
+  });
+
+  $('a.goto').click(function(e) {
+    e.preventDefault();
+    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+      var target = $(this.hash);
+      target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+      if (target.length) {
+        $('html,body').animate({
+          scrollTop: target.offset().top
+        }, 1000);
+        return false;
+      }
+    }
+  });
+  </script>
+  {% block js %}{% endblock js %}
+</body>
+</html>

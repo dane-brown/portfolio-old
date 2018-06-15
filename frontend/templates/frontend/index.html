@@ -1,0 +1,168 @@
+{% extends 'frontend/base.html' %}
+{% load static skills testimonials %}
+{% block content %}
+<section id="intro">
+  <div str-row>
+    <div class="intro-wrapper">
+      <div str-xs="12">
+        <img src="{% static 'images/profile-image.png' %}">
+      </div>
+      <div str-xs="12">
+        <div class="main-headings text-center white">
+          Dane Brown
+        </div>
+      </div>
+      <div str-xs="12">
+        <div class="svg-holder">
+          <a href="" class="social" target="_blank">
+            {% include 'includes/github.svg' %}
+          </a>
+          <a href="" class="social" target="_blank">
+            {% include 'includes/linkedin.svg' %}
+          </a>
+          <a href="" class="social" target="_blank">
+            {% include 'includes/twitter.svg' %}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <a href="#testimonials" class="goto page-arrow">
+    {% include 'includes/arrow.svg' %}
+  </a>
+</section>
+
+
+{% get_testimonials %}
+<section id="testimonials">
+  <div str-row>
+    <div str-xs="12">
+      <div class="main-headings text-center margin-top70 margin-bottom20">Testimonials</div>
+      <div class="sub-headings text-center">A few nice things people have said over the years...</div>
+      <div class="testimonial-slider">
+        {% for testimonial in testimonials %}
+          <div class="testimonial-item">
+            <img src="{{ testimonial.image.url }}">
+            <div class="paragraph text-center white margin-bottom45">
+              {{ testimonial.comment }}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+      <div class="testimonial-dots"></div>
+    </div>
+  </div>
+</section>
+
+
+
+{% get_skills %}
+<section id="skills">
+  <div str-row>
+    <div str-xs="12">
+      <div class="main-headings text-center margin-top70 margin-bottom45">
+        Skills
+      </div>
+    </div>
+    <div str-xs="12">
+      <div class="skills-nav">
+        <a href="#1" class="skill-nav" data-skill="HTML">HTML</a>
+        <a href="#1" class="skill-nav" data-skill="CSS">CSS</a>
+        <a href="#1" class="skill-nav" data-skill="Javascript">Javascript</a>
+        <a href="#1" class="skill-nav" data-skill="Python">Python</a>
+        <a href="#1" class="skill-nav clear">Clear Filter</a>
+      </div>
+    </div>
+  </div>
+  <div str-row>
+    <div class="skill-container">
+      {% for skill in skills %}
+        <div str-xs="12" str-sm="6" str-md="3">
+          <div class="skill-item cat-{{ skill.category }}">
+            <div class="img-container">
+              <img class="skill-img" src="{{ skill.image.url }}">
+            </div>
+            <div class="paragraph">{{ skill.description }}</div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock content %}
+{% block js %}
+<script type="text/javascript">
+  $('.skill-nav').on('click', function(e) {
+    e.preventDefault();
+    var category = $(this).attr('data-skill');
+    console.log(category)
+    $('.skill-item').removeClass('skill-active');
+    $('.skill-item').addClass('skill-deactivate')
+    $('.skill-item').parent().css("display", "none");
+    var active_skills = $('.skill-item.cat-' + category);
+    active_skills.parent().css("display", "block");
+    active_skills.removeClass('skill-deactivate');
+    active_skills.addClass('skill-active');
+    if (active_skills.length == 1) {
+      active_skills.parent().attr("str-xs", "12");
+      active_skills.parent().attr("str-sm", "12");
+      active_skills.parent().attr("str-md", "12");
+    } else if (active_skills.length == 2) {
+      active_skills.parent().attr("str-xs", "12");
+      active_skills.parent().attr("str-sm", "6");
+      active_skills.parent().attr("str-md", "6");
+    } else if (active_skills.length == 3) {
+      active_skills.parent().attr("str-xs", "12");
+      active_skills.parent().attr("str-sm", "12");
+      active_skills.parent().attr("str-md", "4");
+    } else {
+      active_skills.parent().attr("str-xs", "12");
+      active_skills.parent().attr("str-sm", "6");
+      active_skills.parent().attr("str-md", "3");
+    }
+  });
+
+  $('.skill-nav.clear').on('click', function() {
+    $('.skill-item').removeClass('skill-deactivate');
+    $('.skill-item').removeClass('skill-active');
+    $('.skill-item').parent().attr("str-xs", "12");
+    $('.skill-item').parent().attr("str-sm", "6");
+    $('.skill-item').parent().attr("str-md", "3");
+    $('.skill-item').parent().css("display", "block");
+  });
+
+  $(".skill-item").each(function(){
+    height = 0;
+    $(this).find(".img-container .skill-img").each(function(){
+      if($(this).height() >= height){
+        height = $(this).height();
+      }
+    });
+    $(this).find(".img-container").height(height);
+  });
+
+  $(".skill-container").each(function(){
+    height = 0;
+    $(this).find(".skill-item").each(function(){
+      if($(this).height() >= height){
+        height = $(this).height();
+      }
+    });
+    $(this).find(".skill-item").height(height);
+  });
+
+
+  $('.testimonial-slider').slick({
+    arrows: false,
+    sidesToShow: 1,
+    variableHeight: true,
+    autoplay: true,
+    autoplaySpeed: 8000,
+    pauseOnHover: false,
+    dots: true,
+    appendDots: $('.testimonial-dots'),
+  });
+
+
+</script>
+{% endblock js %}

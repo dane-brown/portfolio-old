@@ -1,0 +1,56 @@
+{% extends 'frontend/base.html' %}
+{% block content %}
+{% load projects %}
+<div clas="Projects">
+  <div str-row>
+    <div str-xs="12">
+      <div class="main-headings text-center margin-top70 margin-bottom20">Projects</div>
+      <div class="sub-headings margin-bottom45 text-center">Take a look at some of my work:</div>
+    </div>
+  </div>
+  {% get_projects %}
+  <div class="project-container">
+    <div str-row>
+      {% for project in projects %}
+      <div str-xs="12" str-sm="6" str-md="3">
+        <div data-ref="{{ project.id }}" class="project-item" style="background:{{ project.logo_background }};">
+          <img src="{{ project.project_logo.url }}">
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% for project in projects %}
+  <div class="project-expand ref-{{ project.id }}" style="background:{{ project.logo_background }} ;">
+    <div class="project-close"></div>
+    <div str-row>
+      <div str-xs="12">
+        <div class="expand-logo">
+          <img src="{{ project.project_logo.url }}" class="margin-bottom45">
+        </div>
+      </div>
+      <div str-xs="12">
+        <div class="paragraph text-center margin-bottom45">
+          {{ project.description }}
+        </div>
+      </div>
+      <div str-xs="12">
+        <a href="#1" class="expander-button">Website</a>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock content %}
+{% block js %}
+<script type="text/javascript">
+  $('.project-item').on('click', function() {
+    var id = $(this).attr('data-ref');
+    console.log(id);
+    $('.project-expand.ref-' + id).addClass('expand');
+  });
+  $('.project-close').on('click', function() {
+    $('.project-expand').removeClass('expand');
+  });
+</script>
+{% endblock js %}
