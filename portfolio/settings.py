@@ -13,7 +13,9 @@ SECRET_KEY = 'siqttsi+$(e-15dzgvr61ji1y!7j1_4rzbvh2c1&(*al0#(4eq'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'danebrown.pythonanywhere.com'
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
