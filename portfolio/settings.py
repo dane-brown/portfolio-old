@@ -15,7 +15,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'danebrown.pythonanywhere.com',
-    '127.0.0.1'
+    '127.0.0.1',
+    'www.dane-brown.co.za',
+    'dane-brown.co.za'
 ]
 
 INSTALLED_APPS = [
