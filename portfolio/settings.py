@@ -97,10 +97,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = (
-    ('assets', '/home/portfolio/frontend/static'),
-    )
-
+STATIC_ROOT = '/home/danebrown/portfolio/frontend/static'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 MEDIA_URL = '/uploads/'
