@@ -14,7 +14,8 @@ SECRET_KEY = 'siqttsi+$(e-15dzgvr61ji1y!7j1_4rzbvh2c1&(*al0#(4eq'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'danebrown.pythonanywhere.com'
+    'danebrown.pythonanywhere.com',
+    '127.0.0.1'
 ]
 
 INSTALLED_APPS = [
