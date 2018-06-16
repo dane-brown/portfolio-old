@@ -199,6 +199,7 @@ body {
 .Content .content-wrapper {
   position: relative;
   padding: 0 20px;
+  overflow: hidden;
   width: -moz-calc(100% - 80px);
   width: -o-calc(100% - 80px);
   width: -webkit-calc(100% - 80px);
