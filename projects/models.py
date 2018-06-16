@@ -5,6 +5,8 @@ class Project(models.Model):
     description = models.TextField()
     project_logo = models.FileField(default="")
     logo_background = models.CharField(max_length=255, default="")
+    image = models.FileField(default="")
+    url = models.CharField(max_length=255, default="")
 
     def __str__(self):
         return self.name

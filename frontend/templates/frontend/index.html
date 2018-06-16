@@ -11,16 +11,17 @@
         <div class="main-headings text-center white">
           Dane Brown
         </div>
+        <div class="sub-headings text-center">Web Developer</div>
       </div>
       <div str-xs="12">
         <div class="svg-holder">
-          <a href="" class="social" target="_blank">
+          <a href="https://github.com/dane-brown" class="social git" target="_blank">
             {% include 'includes/github.svg' %}
           </a>
-          <a href="" class="social" target="_blank">
+          <a href="https://www.linkedin.com/in/dane-brown-81665b13b/" class="social link" target="_blank">
             {% include 'includes/linkedin.svg' %}
           </a>
-          <a href="" class="social" target="_blank">
+          <a href="https://twitter.com/" class="social twit" target="_blank">
             {% include 'includes/twitter.svg' %}
           </a>
         </div>
@@ -37,7 +38,7 @@
 <section id="testimonials">
   <div str-row>
     <div str-xs="12">
-      <div class="main-headings text-center margin-top70 margin-bottom20">Testimonials</div>
+      <div class="main-headings text-center margin-bottom20">Testimonials</div>
       <div class="sub-headings text-center">A few nice things people have said over the years...</div>
       <div class="testimonial-slider">
         {% for testimonial in testimonials %}
@@ -60,7 +61,7 @@
 <section id="skills">
   <div str-row>
     <div str-xs="12">
-      <div class="main-headings text-center margin-top70 margin-bottom45">
+      <div class="main-headings text-center margin-bottom45">
         Skills
       </div>
     </div>
@@ -92,6 +93,16 @@
 {% endblock content %}
 {% block js %}
 <script type="text/javascript">
+
+  $(window).on('load', function() {
+    $('.intro-wrapper img').addClass('animate');
+    $('.intro-wrapper .main-headings').addClass('animate');
+    $('.intro-wrapper .sub-headings').addClass('animate');
+    $('.svg-holder .social').addClass('animate');
+    $('.page-arrow').addClass('show');
+  });
+
+
   $('.skill-nav').on('click', function(e) {
     e.preventDefault();
     var category = $(this).attr('data-skill');
@@ -131,15 +142,13 @@
     $('.skill-item').parent().css("display", "block");
   });
 
-  $(".skill-item").each(function(){
-    height = 0;
-    $(this).find(".img-container .skill-img").each(function(){
-      if($(this).height() >= height){
-        height = $(this).height();
-      }
-    });
-    $(this).find(".img-container").height(height);
-  });
+  var heights = $(".skill-img").map(function ()
+      {
+          return $(this).height();
+      }).get(),
+
+      maxHeight = Math.max.apply(null, heights);
+      $('.img-container').css("height", maxHeight);
 
   $(".skill-container").each(function(){
     height = 0;

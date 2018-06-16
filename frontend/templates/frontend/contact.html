@@ -9,7 +9,7 @@
       <div class="sub-headings margin-bottom90 text-center">If you want to get in contact,  please fill in your details below:</div>
     </div>
   </div>
-  <form action="/process-contact-form/" method="POST" id="contact_form">
+  <form action="" method="POST" id="contact_form">
     {% csrf_token %}
     <fieldset class="form-section">
       <div str-row>
@@ -32,32 +32,4 @@
 </section>
 {% endblock content %}
 {% block js %}
-<script type="text/javascript">
-  $('#contact_form').on('submit', function(e) {
-    e.preventDefault();
-    process_form();
-  });
-
-  function process_form() {
-    form = $('#contact_form');
-    console.log(form)
-    $.ajax({
-      url : "process-contact-form/",
-      type : "POST",
-      data : { the_post : form.val() },
-
-      // handles success
-      success: function(json) {
-        form.val('');
-        console.log(json);
-        console.log('success');
-      },
-
-      // handles erros
-      error : function(xhr, errmsg, err) {
-        console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
-      }
-    });
-  }
-</script>
 {% endblock js %}

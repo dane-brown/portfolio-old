@@ -1,29 +1,52 @@
 from django.shortcuts import render
-from django.http import HttpResponse, Http404
-import json
+from .forms import ContactForm
+from django.core.mail import EmailMessage
+from django.shortcuts import redirect
+from django.template.loader import get_template
+
 
 def index(request):
     return render(request, 'frontend/index.html')
 
 def projects(request):
-    return render(request, 'frontend/projects.htmwl')
+    return render(request, 'frontend/projects.html')
 
 def contact(request):
-    return render(request, 'frontend/contact.html')
+    form_class = ContactForm
 
 
-def process_form(request):
     if request.method == 'POST':
-        post_text = request.POST.get('the_post')
-        response_data = {}
+        form = form_class(data=request.POST)
 
-        return HttpResponse(
-            json.dumps(response_data),
-            content_type="application/json"
-        )
+        if form.is_valid():
+            contact_name = request.POST.get(
+                'full_name'
+            , '')
+            contact_email = request.POST.get(
+                'email_address'
+            , '')
+            form_content = request.POST.get('comments', '')
 
-    else:
-        return HttpResponse(
-            json.dumps({"nothing to see": "this isn't happening"}),
-            content_type="application/json"
-        )
+            # Email the profile with the
+            # contact information
+            template = get_template('frontend/contact_template.txt')
+            context = {
+                'contact_name': contact_name,
+                'contact_email': contact_email,
+                'form_content': form_content,
+            }
+            content = template.render(context)
+
+            email = EmailMessage(
+                "New contact form submission",
+                content,
+                "Web Portfolio" +'',
+                ['danebrwn47@gmail.com'],
+                headers = {'Reply-To': contact_email }
+            )
+            email.send()
+            return redirect('contact')
+
+    return render(request, 'frontend/contact.html', {
+        'form': form_class,
+    })
