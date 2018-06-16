@@ -1,7 +1,7 @@
 {% extends 'frontend/base.html' %}
 {% block content %}
 {% load projects %}
-<div clas="Projects">
+<div class="Projects">
   <div str-row>
     <div str-xs="12">
       <div class="main-headings text-center margin-top70 margin-bottom20">Projects</div>
@@ -34,8 +34,18 @@
           {{ project.description }}
         </div>
       </div>
-      <div str-xs="12">
-        <a href="#1" class="expander-button">Website</a>
+      {% if project.image.url %}
+      <div str-xs="12" class="margin-bottom45">
+        <div class="project-frame">
+          <div class="bar">
+            <i></i>
+          </div>
+          <img src="{{ project.image.url }}">
+        </div>
+      </div>
+      {% endif %}
+      <div str-xs="12" class="margin-bottom45">
+        <a href="{{ project.url|safe }}" target="_blank" class="expander-button">Website</a>
       </div>
     </div>
   </div>
@@ -44,13 +54,13 @@
 {% endblock content %}
 {% block js %}
 <script type="text/javascript">
-  $('.project-item').on('click', function() {
-    var id = $(this).attr('data-ref');
-    console.log(id);
-    $('.project-expand.ref-' + id).addClass('expand');
-  });
-  $('.project-close').on('click', function() {
-    $('.project-expand').removeClass('expand');
-  });
+$('.project-item').on('click', function() {
+  var id = $(this).attr('data-ref');
+  console.log(id);
+  $('.project-expand.ref-' + id).addClass('expand');
+});
+$('.project-close').on('click', function() {
+  $('.project-expand').removeClass('expand');
+});
 </script>
 {% endblock js %}

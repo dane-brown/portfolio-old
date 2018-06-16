@@ -97,7 +97,8 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 MEDIA_URL = '/uploads/'
 
-
-TEMPLATE_CONTEXT_PROCESSOR = (
-    'django.core.context_processors.csrf',
-)
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'dane-brown'
+EMAIL_HOST_PASSWORD = 'Springbok1'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True

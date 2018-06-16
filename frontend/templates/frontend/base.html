@@ -8,8 +8,14 @@
   <link rel="stylesheet" href="{% static 'css/structure.legacy.min.css' %}" type="text/css">
   <link rel="stylesheet" href="{% static 'css/custom.css' %}" type="text/css">
   <link rel="stylesheet" href="{% static 'css/slick.css' %}" type="text/css">
+
+  <link REL="shortcut icon" HREF="{% static 'favicon.ico' %}" TYPE="image/x-icon">
+  <link REL="shortcut icon" HREF="{% static 'favicon.png' %}" TYPE="image/x-icon">
 </head>
 <body>
+  <div id="overlay">
+    <div class="spinner"></div>
+  </div>
   <div class="Content">
     {% include 'frontend/navigation.html' %}
     <div class="content-wrapper">
@@ -19,6 +25,12 @@
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
   <script src="{% static 'js/slick.min.js' %}"></script>
   <script type="text/javascript">
+  var overlay = document.getElementById("overlay");
+
+  window.addEventListener('load', function(){
+    overlay.style.display = 'none';
+  })
+
   $('.nav-opener').on('click', function() {
     $('.Navigation').toggleClass('open');
     $('.content-wrapper').toggleClass('smaller');
@@ -37,7 +49,7 @@
       }
     }
   });
-  </script>
-  {% block js %}{% endblock js %}
+</script>
+{% block js %}{% endblock js %}
 </body>
 </html>
