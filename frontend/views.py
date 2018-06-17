@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .forms import ContactForm
 from django.core.mail import EmailMessage
 from django.shortcuts import redirect
+from django.contrib import messages
 from django.template.loader import get_template
 
 
@@ -27,6 +28,11 @@ def contact(request):
             , '')
             form_content = request.POST.get('comments', '')
 
+
+            # Add to Leads
+
+            form.save()
+
             # Email the profile with the
             # contact information
             template = get_template('frontend/contact_template.txt')
@@ -44,8 +50,10 @@ def contact(request):
                 ['danebrwn47@gmail.com'],
                 headers = {'Reply-To': contact_email }
             )
-            email.send()
-            return redirect('contact')
+            #email.send()
+            #return redirect('contact')
+
+            messages.success(request, 'Thank you. Your request has been sent!')
 
     return render(request, 'frontend/contact.html', {
         'form': form_class,

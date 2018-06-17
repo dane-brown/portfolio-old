@@ -142,23 +142,26 @@
     $('.skill-item').parent().css("display", "block");
   });
 
-  var heights = $(".skill-img").map(function ()
-      {
-          return $(this).height();
-      }).get(),
+  $(window).on('load', function(){
+    var heights = $(".skill-img").map(function ()
+        {
+            return $(this).height();
+        }).get(),
+  
+        maxHeight = Math.max.apply(null, heights);
+        $('.img-container').css("height", maxHeight);
 
-      maxHeight = Math.max.apply(null, heights);
-      $('.img-container').css("height", maxHeight);
-
-  $(".skill-container").each(function(){
-    height = 0;
-    $(this).find(".skill-item").each(function(){
-      if($(this).height() >= height){
-        height = $(this).height();
-      }
+    $(".skill-container").each(function(){
+      height = 0;
+      $(this).find(".skill-item").each(function(){
+        if($(this).height() >= height){
+          height = $(this).height();
+        }
+      });
+      $(this).find(".skill-item").height(height);
     });
-    $(this).find(".skill-item").height(height);
   });
+
 
 
   $('.testimonial-slider').slick({

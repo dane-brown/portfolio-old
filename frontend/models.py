@@ -1,3 +1,12 @@
 from django.db import models
 
-# Create your models here.
+class Lead(models.Model):
+
+    full_name = models.CharField(max_length=255, default='')
+
+    email_address = models.CharField(max_length=255, default='')
+
+    comments = models.TextField()
+
+    def __str__(self):
+        return self.full_name

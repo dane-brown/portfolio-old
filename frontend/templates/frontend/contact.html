@@ -26,6 +26,13 @@
         </div>
       </div>
       <button type="submit" class="contact-button">Submit</button>
+      {% if messages %}
+      {% for message in messages %}
+      <div class="paragraph white margin-top20" style="width: 100%; float: left;">
+        {{ message }}
+      </div>
+      {% endfor %}
+      {% endif %}
     </fieldset>
   </form>
 
