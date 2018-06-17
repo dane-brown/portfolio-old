@@ -103,9 +103,3 @@ STATIC_ROOT = '/home/danebrown/portfolio/frontend/static/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 MEDIA_URL = '/uploads/'
-
-EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_HOST_USER = 'dane-brown'
-EMAIL_HOST_PASSWORD = 'Springbok1'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
