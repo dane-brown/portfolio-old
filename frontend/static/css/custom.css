@@ -1157,3 +1157,6 @@ input:-ms-input-placeholder {
     transform: rotate(360deg);
   }
 }
+.margin-top20 {
+  margin-top: 20px;
+}

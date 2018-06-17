@@ -1,6 +1,7 @@
 from django import forms
+from .models import Lead
 
-class ContactForm(forms.Form):
+class ContactForm(forms.ModelForm):
 
     full_name = forms.CharField(widget=forms.TextInput(
         attrs={
@@ -29,3 +30,7 @@ class ContactForm(forms.Form):
         required=True,
         max_length=400,
     )
+
+    class Meta:
+        model = Lead
+        fields = ('full_name', 'email_address', 'comments',)
