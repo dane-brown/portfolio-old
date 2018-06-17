@@ -31,7 +31,6 @@ INSTALLED_APPS = [
     'projects',
     'skills',
     'frontend',
-    'leads'
 ]
 
 MIDDLEWARE = [
