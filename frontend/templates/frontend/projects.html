@@ -30,9 +30,11 @@
         </div>
       </div>
       <div str-xs="12">
+        {% if project.description %}
         <div class="paragraph text-center margin-bottom45">
           {{ project.description }}
         </div>
+        {% endif %}
       </div>
       {% if project.image.url %}
       <div str-xs="12" class="margin-bottom45">
@@ -44,9 +46,11 @@
         </div>
       </div>
       {% endif %}
+      {% if project.url %}
       <div str-xs="12" class="margin-bottom45">
         <a href="{{ project.url|safe }}" target="_blank" class="expander-button">Website</a>
       </div>
+      {% endif %}
     </div>
   </div>
   {% endfor %}
@@ -54,13 +58,13 @@
 {% endblock content %}
 {% block js %}
 <script type="text/javascript">
-$('.project-item').on('click', function() {
-  var id = $(this).attr('data-ref');
-  console.log(id);
-  $('.project-expand.ref-' + id).addClass('expand');
-});
-$('.project-close').on('click', function() {
-  $('.project-expand').removeClass('expand');
-});
+  $('.project-item').on('click', function() {
+    var id = $(this).attr('data-ref');
+    console.log(id);
+    $('.project-expand.ref-' + id).addClass('expand');
+  });
+  $('.project-close').on('click', function() {
+    $('.project-expand').removeClass('expand');
+  });
 </script>
 {% endblock js %}
