@@ -520,6 +520,8 @@ body {
   position: relative;
 }
 #testimonials .testimonial-slider .testimonial-item img {
+  max-width: 160px;
+  border-radius: 160px;
   margin: 0 auto 40px auto;
 }
 #testimonials .testimonial-dots {

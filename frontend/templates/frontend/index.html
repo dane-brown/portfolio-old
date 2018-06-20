@@ -21,7 +21,7 @@
           <a href="https://www.linkedin.com/in/dane-brown-81665b13b/" class="social link" target="_blank">
             {% include 'includes/linkedin.svg' %}
           </a>
-          <a href="https://twitter.com/" class="social twit" target="_blank">
+          <a href="https://twitter.com/Dane24400992" class="social twit" target="_blank">
             {% include 'includes/twitter.svg' %}
           </a>
         </div>
@@ -44,9 +44,14 @@
         {% for testimonial in testimonials %}
           <div class="testimonial-item">
             <img src="{{ testimonial.image.url }}">
-            <div class="paragraph text-center white margin-bottom45">
+            <div class="paragraph text-center white margin-bottom20">
               {{ testimonial.comment }}
             </div>
+            {% if testimonial.full_name %}
+            <div class="margin-bottom45 paragraph white text-center" style="font-size: 19px;">
+              <strong>{{ testimonial.full_name }}</strong>
+            </div>
+            {% endif %}
           </div>
         {% endfor %}
       </div>
@@ -71,6 +76,7 @@
         <a href="#1" class="skill-nav" data-skill="CSS">CSS</a>
         <a href="#1" class="skill-nav" data-skill="Javascript">Javascript</a>
         <a href="#1" class="skill-nav" data-skill="Python">Python</a>
+        <a href="#1" class="skill-nav" data-skill="Design">Design</a>
         <a href="#1" class="skill-nav clear">Clear Filter</a>
       </div>
     </div>
@@ -83,7 +89,9 @@
             <div class="img-container">
               <img class="skill-img" src="{{ skill.image.url }}">
             </div>
+            {% if skill.description %}
             <div class="paragraph">{{ skill.description }}</div>
+            {% endif %}
           </div>
         </div>
       {% endfor %}
@@ -147,7 +155,7 @@
         {
             return $(this).height();
         }).get(),
-  
+
         maxHeight = Math.max.apply(null, heights);
         $('.img-container').css("height", maxHeight);
 
@@ -170,7 +178,7 @@
     variableHeight: true,
     autoplay: true,
     autoplaySpeed: 8000,
-    pauseOnHover: false,
+    pauseOnHover: true,
     dots: true,
     appendDots: $('.testimonial-dots'),
   });
